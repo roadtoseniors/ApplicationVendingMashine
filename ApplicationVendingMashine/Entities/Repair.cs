@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApplicationVendingMashine.Entities;
 
@@ -10,7 +11,8 @@ public partial class Repair
     public string? Date { get; set; }
 
     public string? IssuesFound { get; set; }
-
+    
+    [JsonIgnore]
     public string? VendingMachineGuid { get; set; }
 
     public int? FullName { get; set; }

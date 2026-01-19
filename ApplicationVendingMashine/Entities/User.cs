@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApplicationVendingMashine.Entities;
 
@@ -17,6 +18,7 @@ public partial class User
 
     public string? Phone { get; set; }
 
+    [JsonIgnore]
     public string Guid { get; set; } = null!;
 
     public int? IsOperator { get; set; }
@@ -24,6 +26,7 @@ public partial class User
     public int? Role { get; set; }
 
     public virtual Role? RoleNavigation { get; set; }
+    [JsonIgnore]
 
     public virtual ICollection<VendingMashine> VendingMashines { get; set; } = new List<VendingMashine>();
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApplicationVendingMashine.Entities;
 
@@ -10,6 +11,7 @@ public partial class VendingMashine
     public int? SerialNumber { get; set; }
 
     public string? Name { get; set; }
+    [JsonIgnore]
 
     public string? UserGuid { get; set; }
 
@@ -44,6 +46,7 @@ public partial class VendingMashine
     public string? WorkingHours { get; set; }
 
     public int? Engineer { get; set; }
+    [JsonIgnore]
 
     public string Guid { get; set; } = null!;
 
@@ -76,8 +79,10 @@ public partial class VendingMashine
     public virtual Operator? OperatorNavigation { get; set; }
 
     public virtual Place? PlaceNavigation { get; set; }
+    [JsonIgnore]
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    [JsonIgnore]
 
     public virtual ICollection<Repair> Repairs { get; set; } = new List<Repair>();
 
@@ -86,6 +91,7 @@ public partial class VendingMashine
     public virtual Status? StatusNavigation { get; set; }
 
     public virtual User? User { get; set; }
+    [JsonIgnore]
 
     public virtual ICollection<VendingmashinePaymenttype> VendingmashinePaymenttypes { get; set; } = new List<VendingmashinePaymenttype>();
 

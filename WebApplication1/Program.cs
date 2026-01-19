@@ -1,34 +1,100 @@
+using ApplicationVendingMashine.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<MyDbContext>();
+builder.Services.AddCors();
 
 var app = builder.Build();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+app.MapGet("/api/companies", (MyDbContext context) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    return context.Companies.ToList();
+});
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/api/CriticalThresholdTemplates", (MyDbContext context) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-            new WeatherForecast
-            (
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
-            ))
-        .ToArray();
-    return forecast;
+    return context.CriticalThresholdTemplates.ToList();
+});
+
+app.MapGet("/api/models", (MyDbContext context) =>
+{
+    return context.Models.ToList();
+});
+
+app.MapGet("/api/notificationstemplates", (MyDbContext context) =>
+{
+    return context.Notificationtemplates.ToList();
+});
+
+app.MapGet("/api/operators", (MyDbContext context) =>
+{
+    return context.Operators.ToList();
+});
+
+app.MapGet("/api/paymentmetods", (MyDbContext context) =>
+{
+    return context.Paymentmetods.ToList();
+});
+
+app.MapGet("/api/paymenttypes", (MyDbContext context) =>
+{
+    return context.Paymenttypes.ToList();
+});
+
+app.MapGet("/api/places", (MyDbContext context) =>
+{
+    return context.Places.ToList();
+});
+app.MapGet("/api/products", (MyDbContext context) =>
+{
+    return context.Products.ToList();
+});
+
+app.MapGet("/api/repairs", (MyDbContext context) =>
+{
+    return context.Repairs.ToList();
+});
+
+app.MapGet("/api/roles", (MyDbContext context) =>
+{
+    return context.Roles.ToList();
+});
+
+app.MapGet("/api/sales", (MyDbContext context) =>
+{
+    return context.Sales.ToList();
+});
+
+app.MapGet("/api/servicepriorities", (MyDbContext context) =>
+{
+    return context.Servicepriorities.ToList();
+});
+
+app.MapGet("/api/statuses", (MyDbContext context) =>
+{
+    return context.Statuses.ToList();
+});
+
+app.MapGet("/api/users", (MyDbContext context) =>
+{
+    return context.Users.ToList();
+});
+
+app.MapGet("/api/vendingsmashines", (MyDbContext context) =>
+{
+    return context.VendingMashines.ToList();
+});
+
+app.MapGet("/api/vendingmashinepaymenttypes", (MyDbContext context) =>
+{
+    return context.VendingmashinePaymenttypes.ToList();
+});
+
+app.MapGet("/api/workmodes", (MyDbContext context) =>
+{
+    return context.Workmodes.ToList();
 });
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

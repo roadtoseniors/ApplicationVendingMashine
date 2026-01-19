@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApplicationVendingMashine.Entities;
 
@@ -9,6 +10,7 @@ public partial class Sale
 
     public string? Timestamp { get; set; }
 
+    [JsonIgnore]
     public string? ProductGuid { get; set; }
 
     public string? TotalPrice { get; set; }
